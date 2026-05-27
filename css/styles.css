@@ -91,32 +91,42 @@ body {
 }
 
 .nav-logo-img {
-    height: 36px;
+    height: 40px;
+    max-width: 180px;
     width: auto;
+    object-fit: contain;
 }
 
 .footer-logo-img {
-    height: 32px;
+    height: 36px;
+    max-width: 180px;
     width: auto;
+    object-fit: contain;
     filter: brightness(0) invert(1);
 }
 
 .footer-paymentus-logo {
-    height: 24px;
+    height: 22px;
+    max-width: 140px;
     width: auto;
+    object-fit: contain;
     filter: brightness(0) invert(1);
-    margin-top: 8px;
+    margin-top: 10px;
+    display: block;
 }
 
 .footer-powered {
     margin-bottom: 4px !important;
+    font-size: 14px;
 }
 
 .badge-logo {
-    height: 14px;
+    height: 16px;
+    max-width: 90px;
     width: auto;
+    object-fit: contain;
     vertical-align: middle;
-    margin-right: 4px;
+    margin-right: 6px;
 }
 
 .logo-icon {
@@ -659,11 +669,31 @@ body {
     color: white;
 }
 
+.footer-brand-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.footer-brand-centered .footer-logo-img {
+    height: 40px;
+    max-width: 200px;
+}
+
+.footer-brand-centered .footer-paymentus-logo {
+    height: 20px;
+    max-width: 120px;
+    margin-top: 0;
+}
+
 .footer-bottom {
     padding-top: 32px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-size: 13px;
     color: rgba(255, 255, 255, 0.4);
+    text-align: center;
 }
 
 /* Page Content Styles (for subpages) */
@@ -878,6 +908,11 @@ body {
         display: block;
     }
 
+    .nav-logo-img {
+        height: 32px;
+        max-width: 150px;
+    }
+
     .hero-stats {
         gap: 24px;
     }
@@ -905,6 +940,16 @@ body {
         gap: 32px;
     }
 
+    .footer-logo-img {
+        height: 28px;
+        max-width: 150px;
+    }
+
+    .footer-paymentus-logo {
+        height: 18px;
+        max-width: 110px;
+    }
+
     .hero-cta {
         flex-direction: column;
         align-items: center;
@@ -912,6 +957,11 @@ body {
 
     .slide-card {
         padding: 24px;
+    }
+
+    .badge-logo {
+        height: 13px;
+        max-width: 70px;
     }
 }
 
@@ -923,5 +973,18 @@ body {
 
     .section {
         padding: 60px 16px;
+    }
+
+    .nav-logo-img {
+        height: 28px;
+        max-width: 130px;
+    }
+
+    .footer-logo-img {
+        height: 24px;
+    }
+
+    .footer-paymentus-logo {
+        height: 16px;
     }
 }
