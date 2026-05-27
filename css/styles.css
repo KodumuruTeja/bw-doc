@@ -91,10 +91,11 @@ body {
 }
 
 .nav-logo-img {
-    height: 40px;
-    max-width: 180px;
+    height: 28px;
+    max-width: 160px;
     width: auto;
     object-fit: contain;
+    display: block;
 }
 
 .footer-logo-img {
@@ -909,8 +910,8 @@ body {
     }
 
     .nav-logo-img {
-        height: 32px;
-        max-width: 150px;
+        height: 24px;
+        max-width: 140px;
     }
 
     .hero-stats {
@@ -976,8 +977,8 @@ body {
     }
 
     .nav-logo-img {
-        height: 28px;
-        max-width: 130px;
+        height: 22px;
+        max-width: 120px;
     }
 
     .footer-logo-img {
