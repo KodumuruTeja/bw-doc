@@ -88,7 +88,7 @@
                 <h4>Key differentiators:</h4>
                 <ul>
                     <li><strong>Not a retail wallet</strong> — designed specifically for recurring biller relationships</li>
-                    <li><strong>Not a password manager</strong> — eliminates passwords entirely</li>
+                    <li><strong>No stored passwords</strong> — uses one-time codes and social login instead</li>
                     <li><strong>Not channel-specific</strong> — works on web, mobile, IVR, voice, agent, and in-person</li>
                 </ul>
             </div>
@@ -98,11 +98,12 @@
                 <span class="slide-number">Slide 5 — How It Works</span>
                 <h3>Consumer Journey (4 Steps, Once)</h3>
                 <pre><code>[1] REGISTER          →  [2] VERIFY           →  [3] LINK              →  [4] PAY
-Email only.              Identity verified.       Bills & payment         Confirm BillWallet ID.
-No passwords.            BillWallet ID issued.    methods linked once.    Done in seconds.
+Email only.              OTC sent to email.       Bills & payment         Express Payment or
+No passwords.            BillWallet ID issued.    methods linked once.    confirm via OTC.
 No account numbers.      Works all channels.      Securely stored.        4x faster.</code></pre>
-                <p><strong>After setup, every future payment is: Confirm ID → Pay → Receipt.</strong></p>
-                <div class="speaker-note">Walk through the demo. Show how a consumer goes from "I need to pay my water bill" to "paid" in under 30 seconds without typing an account number or password.</div>
+                <p><strong>After setup, returning users get Express Payment (one-click, no OTC) or standard widget with pre-filled data.</strong></p>
+                <p><strong>Fast Signup path:</strong> Consumers can also opt in via a checkbox on the ROTP payment confirmation page — zero friction.</p>
+                <div class="speaker-note">Walk through the demo. Show how a consumer goes from "I need to pay my water bill" to "paid" in under 30 seconds. Highlight Express Payment for returning users and Fast Signup from ROTP.</div>
             </div>
 
             <!-- Slide 6 -->
@@ -118,7 +119,7 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                         <tr><td>Login abandonment</td><td>~80%</td><td><strong>Near zero</strong></td></tr>
                         <tr><td>Payment method</td><td>Re-entered monthly</td><td><strong>Stored & tokenized</strong></td></tr>
                         <tr><td>Channel consistency</td><td>Fragmented per channel</td><td><strong>Unified identity</strong></td></tr>
-                        <tr><td>Security model</td><td>Password-based</td><td><strong>Passwordless + verified</strong></td></tr>
+                        <tr><td>Security model</td><td>Password-based</td><td><strong>No passwords (OTC + social login)</strong></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -130,7 +131,7 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                 <ul>
                     <li>Faster payments = reduced DSO</li>
                     <li>Fewer abandoned payments = more on-time collections</li>
-                    <li>Persistent wallet = higher AutoPay conversion over time</li>
+                    <li>Persistent wallet = higher repeat payment rates and digital engagement</li>
                 </ul>
                 <h3>Cost Reduction</h3>
                 <ul>
@@ -168,19 +169,15 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
             <!-- Slide 9 -->
             <div class="slide-card">
                 <span class="slide-number">Slide 9 — AutoPay: Removing the Last Barrier</span>
-                <h3>Why don't more customers enroll in AutoPay?</h3>
+                <h3>How BillWallet® Builds the Foundation for Recurring Payments</h3>
+                <p>While AutoPay enrollment remains in the core platform today, BillWallet® removes the barriers that prevent consumers from engaging digitally:</p>
                 <ol>
-                    <li>They don't trust storing payment info on "yet another" website</li>
-                    <li>The enrollment flow requires too many steps</li>
-                    <li>They want control over when/how much is paid</li>
+                    <li><strong>Trust established</strong> — Consumer has already stored payment info securely in BillWallet</li>
+                    <li><strong>Relationship built</strong> — Payment method and billing account are linked</li>
+                    <li><strong>Express Payment</strong> — Returning users already get one-click payments (1/month, amount due)</li>
                 </ol>
-                <h4>BillWallet® solves all three:</h4>
-                <ol>
-                    <li><strong>Trust</strong> — One verified identity with enterprise-grade security; not another website to manage</li>
-                    <li><strong>Simplicity</strong> — Payment method is already linked; AutoPay enrollment is a single toggle</li>
-                    <li><strong>Control</strong> — BillWallet® can present bill details, usage alerts, and amount before auto-debit</li>
-                </ol>
-                <blockquote>Higher AutoPay enrollment = predictable cash flow + lower cost-to-serve.</blockquote>
+                <p><strong>The path:</strong> ROTP → Fast Signup → BillWallet Express → Core Platform AutoPay enrollment becomes trivial because data is already stored.</p>
+                <blockquote>BillWallet converts one-time payers into digitally connected, repeat-paying customers — the best candidates for AutoPay.</blockquote>
             </div>
 
             <!-- Slide 10 -->
@@ -191,8 +188,8 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                         <tr><th>Security Layer</th><th>Detail</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Passwordless</strong></td><td>Nothing to phish, stuff, or brute-force</td></tr>
-                        <tr><td><strong>Verified Identity</strong></td><td>Identity proofed before BillWallet® ID issuance</td></tr>
+                        <tr><td><strong>No Stored Passwords</strong></td><td>OTC + social login (Google/Apple) — nothing to phish, stuff, or brute-force</td></tr>
+                        <tr><td><strong>Verified Identity</strong></td><td>Email verified via OTC before BillWallet® ID issuance</td></tr>
                         <tr><td><strong>PCI DSS Level 1</strong></td><td>Highest level of payment card security compliance</td></tr>
                         <tr><td><strong>SecureService™</strong></td><td>Patented end-to-end encryption across all channels</td></tr>
                         <tr><td><strong>Data Isolation</strong></td><td>BillWallet services enforce issuer-level tenant separation</td></tr>
@@ -201,7 +198,7 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                         <tr><td><strong>AI Fraud Detection</strong></td><td>Anomaly detection on payment patterns</td></tr>
                     </tbody>
                 </table>
-                <blockquote>"No passwords that can be stolen makes BillWallet® more secure than traditional payment methods."</blockquote>
+                <blockquote>"No stored passwords and one-time codes for every session makes BillWallet® more secure than traditional password-based payment methods."</blockquote>
             </div>
 
             <!-- Slide 11 -->
@@ -213,12 +210,12 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                     </thead>
                     <tbody>
                         <tr><td>Built for bill pay</td><td>Yes (with friction)</td><td>No</td><td><strong>Yes</strong></td></tr>
-                        <tr><td>Passwordless</td><td>No</td><td>Biometric only</td><td><strong>Yes</strong></td></tr>
+                        <tr><td>No stored passwords</td><td>No</td><td>Biometric only</td><td><strong>Yes (OTC + social)</strong></td></tr>
                         <tr><td>Works on IVR/Voice</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
                         <tr><td>Links biller accounts</td><td>Yes (per portal)</td><td>No</td><td><strong>Yes (unified)</strong></td></tr>
                         <tr><td>Persistent relationship</td><td>Per-session</td><td>No</td><td><strong>Yes</strong></td></tr>
                         <tr><td>AI billing intelligence</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
-                        <tr><td>Drives AutoPay conversion</td><td>Indirect</td><td>No</td><td><strong>Direct</strong></td></tr>
+                        <tr><td>Express one-click payments</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
                         <tr><td>Patented</td><td>No</td><td>Yes (retail)</td><td><strong>Yes (bill pay)</strong></td></tr>
                     </tbody>
                 </table>
@@ -332,7 +329,7 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                 <tbody>
                     <tr><td>"We already have a portal"</td><td>BillWallet® enhances your portal — it doesn't replace it. Widget integration takes weeks.</td></tr>
                     <tr><td>"Our customers prefer phone/IVR"</td><td>BillWallet® works on IVR too. Same ID, same speed, no account number recitation.</td></tr>
-                    <tr><td>"We're concerned about security"</td><td>Passwordless is more secure. PCI L1, SOC 1/2, HIPAA, patented SecureService™.</td></tr>
+                    <tr><td>"We're concerned about security"</td><td>No stored passwords (OTC-based) is more secure. PCI L1, SOC 1/2, HIPAA, domain whitelisting, patented SecureService™.</td></tr>
                     <tr><td>"We need to see ROI first"</td><td>We provide custom ROI modeling before you commit. Pilot programs available.</td></tr>
                     <tr><td>"Our CIS is old/custom"</td><td>450+ integrations. If you're on Paymentus IPP already, it's an activation.</td></tr>
                     <tr><td>"Customers won't adopt a new wallet"</td><td>Registration is email-only, under 60 seconds. No app download required.</td></tr>
@@ -347,7 +344,7 @@ No account numbers.      Works all channels.      Securely stored.        4x fas
                 <tbody>
                     <tr><td>Bank bill pay</td><td>No biller relationship; delayed posting</td><td>Real-time posting + persistent identity</td></tr>
                     <tr><td>Retail wallets (PayPal, Apple Pay)</td><td>Not built for recurring; no biller integration</td><td>Purpose-built for bill/service relationships</td></tr>
-                    <tr><td>Competitor biller platforms</td><td>Still password-based; channel-limited</td><td>Passwordless + omnichannel</td></tr>
+                    <tr><td>Competitor biller platforms</td><td>Still password-based; channel-limited</td><td>No stored passwords + omnichannel + Express Payment</td></tr>
                     <tr><td>DIY/build-your-own</td><td>PCI burden on biller; slow to market</td><td>Fully managed, compliant, rapid deployment</td></tr>
                 </tbody>
             </table>
