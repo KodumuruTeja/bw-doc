@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internal Knowledge Guide — BillWallet®</title>
+    <title>Internal Guide — BillWallet™</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="../index.html" class="nav-logo">
-                <span class="logo-text">BillWallet<sup>®</sup></span>
+                <span class="logo-text">BillWallet<sup>™</sup></span>
             </a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
                 <li><a href="value-proposition.html" class="nav-link">Value Proposition</a></li>
                 <li><a href="sales-deck.html" class="nav-link">Sales Deck</a></li>
                 <li><a href="internal-guide.html" class="nav-link active">Internal Guide</a></li>
+                <li><a href="marketing.html" class="nav-link">Marketing</a></li>
             </ul>
             <button class="nav-toggle" id="nav-toggle">
                 <i class="fas fa-bars"></i>
@@ -29,341 +30,294 @@
         </div>
     </nav>
 
-    <!-- Page Hero -->
     <section class="page-hero">
-        <h1>Internal Knowledge Guide</h1>
-        <p>For Paymentus employees: Architecture, one-time payments & AutoPay deep-dive, security layers, and role-based talking points</p>
+        <h1>Internal Guide</h1>
+        <p>Everything Paymentus employees need to understand, implement, and sell BillWallet™</p>
     </section>
 
-    <!-- Content -->
     <section class="page-content">
         <div class="content-wrapper">
 
-            <h2>1. What Is BillWallet®?</h2>
-            <p>BillWallet® is Paymentus' <strong>patented, AI-native digital identity and payment wallet</strong> designed specifically for bill and service payments. It is a product layer that sits on top of our Intelligent Payment Platform (IPP) and the Instant Payment Network (IPN) microservices stack.</p>
+            <h2>What Is BillWallet™?</h2>
 
-            <h3>In Simple Terms</h3>
-            <p>Think of BillWallet® as a <strong>"fast pass" for bill payments</strong>. Instead of consumers remembering a username, password, and account number for every biller they pay, they register once with an email, verify via a One Time Code (OTC), and use that single ID to pay any bill on any channel.</p>
+            <div class="highlight-box">
+                <h3>The One-Liner</h3>
+                <p class="big-quote">"BillWallet is TSA PreCheck for bill payments — one-time identity verification, then fast-lane access every time after."</p>
+            </div>
 
-            <h3>What BillWallet® Is NOT</h3>
+            <p>BillWallet™ is Paymentus' <strong>patented digital identity and payment wallet</strong> for bill payments. It sits on top of our Intelligent Payment Platform (IPP) and converts one-time guest payers into stored digital relationships.</p>
+
+            <div class="key-facts">
+                <div class="fact-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>72% Faster</h4>
+                    <p>Payments under 30 seconds for returning users</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-hand-pointer"></i>
+                    <h4>One-Click</h4>
+                    <p>Express Payment — no verification needed for returns</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-key"></i>
+                    <h4>No Passwords</h4>
+                    <p>OTC + Google/Apple sign-in. Nothing to steal.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-toggle-on"></i>
+                    <h4>Config Activation</h4>
+                    <p>No new integration — enable via script for existing billers</p>
+                </div>
+            </div>
+
+            <h3>What BillWallet™ Is NOT</h3>
             <ul>
-                <li>It is <strong>not a replacement</strong> for the core IPP platform or biller portals</li>
-                <li>It is <strong>not a retail wallet</strong> like Apple Pay or Google Pay (those are for one-off purchases)</li>
-                <li>It is <strong>not a mobile app</strong> consumers need to download (it works within existing channels)</li>
-                <li>It does <strong>not currently support AutoPay</strong> — AutoPay remains a core platform feature</li>
-                <li>It currently supports <strong>single-pay only</strong> (multipay is not supported)</li>
+                <li>NOT a replacement for the Customer Portal (CP) or biller portals</li>
+                <li>NOT a retail wallet like Apple Pay / Google Pay</li>
+                <li>NOT a mobile app to download</li>
+                <li>Does NOT support AutoPay (that's core platform)</li>
+                <li>Single-pay only (no multipay currently)</li>
             </ul>
 
-            <h2>2. The Architecture</h2>
-            <pre><code>┌─────────────────────────────────────────────────────────────────┐
-│                    CONSUMER TOUCHPOINTS                          │
-│  Web Portal │ Mobile │ IVR │ Voice │ Agent │ Email/SMS │ Kiosk  │
-└──────────────────────────────┬──────────────────────────────────┘
-                               │
-                    ┌──────────▼──────────┐
-                    │   BillWallet® Layer  │  ← Identity + Wallet
-                    │   (IPN Microservices)│
-                    └──────────┬──────────┘
-                               │
-          ┌────────────────────┼────────────────────┐
-          │                    │                    │
-   ┌──────▼──────┐    ┌───────▼──────┐    ┌───────▼───────┐
-   │ identity-ms │    │  wallet-ms   │    │  payment-ms   │
-   │ (User ID &  │    │ (Accounts &  │    │ (Process pay  │
-   │  verification)   │  methods)    │    │  via XOTP)    │
-   └─────────────┘    └──────────────┘    └───────────────┘
-          │                    │                    │
-   ┌──────▼────────────────────▼────────────────────▼──────┐
-   │          Paymentus IPP / Core Platform                 │
-   │   (Billing, Posting, Reconciliation, 450+ CIS)        │
-   └───────────────────────────────────────────────────────┘</code></pre>
+            <h2>How It Works — Interactive Architecture</h2>
 
-            <h3>Key Internal Components</h3>
-            <table>
-                <thead>
-                    <tr><th>Service</th><th>What It Does</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>bill-wallet-ms</code></td><td>Main BillWallet backend microservice</td></tr>
-                    <tr><td><code>identity-ms</code></td><td>Manages consumer identity verification and BillWallet ID</td></tr>
-                    <tr><td><code>wallet-ms</code></td><td>Stores linked accounts and payment methods</td></tr>
-                    <tr><td><code>payment-ms</code></td><td>Processes payments via XOTP</td></tr>
-                    <tr><td><code>bill-wallet-config-ms</code></td><td>Manages biller-specific BillWallet configuration</td></tr>
-                    <tr><td><code>bill-wallet-app-manager-ms</code></td><td>Manages BillWallet app instances</td></tr>
-                    <tr><td><code>bill-wallet-invites-ms</code></td><td>Handles invitation flows for new BillWallet users</td></tr>
-                    <tr><td><code>bill-wallet-sdk-renderer-ms</code></td><td>Renders BillWallet widget for embedded deployments</td></tr>
-                    <tr><td><code>lib-blwt-internal</code></td><td>Shared internal library (middleware, constants, utilities)</td></tr>
-                    <tr><td><code>lib-bill-wallet-config-client</code></td><td>Client library for config service integration</td></tr>
-                    <tr><td><code>blwt-ui-core</code></td><td>Shared UI components for all BillWallet front-end apps</td></tr>
-                </tbody>
-            </table>
+            <p>Click on any layer to understand the flow. BillWallet sits between consumer touchpoints and the core payment platform.</p>
 
-            <h3>Channels (Internal Codes)</h3>
-            <table>
-                <thead>
-                    <tr><th>Channel Code</th><th>Meaning</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>BW_CP</code></td><td>BillWallet Consumer Portal</td></tr>
-                    <tr><td><code>BW_EXT</code></td><td>BillWallet External Widget</td></tr>
-                    <tr><td><code>BW_IVR</code></td><td>BillWallet IVR Flow</td></tr>
-                    <tr><td><code>BW_PORTAL</code></td><td>BillWallet Standalone Portal</td></tr>
-                    <tr><td><code>BW_ROTP</code></td><td>BillWallet Real-time One-Time Payment</td></tr>
-                    <tr><td><code>BW_INVITE</code></td><td>BillWallet Invitation Flow</td></tr>
-                    <tr><td><code>BW_AD</code></td><td>BillWallet Agent Desktop</td></tr>
-                    <tr><td><code>BW_VOICEASSISTANT</code></td><td>BillWallet Voice Assistant</td></tr>
-                </tbody>
-            </table>
+            <div class="architecture-interactive">
+                <div class="arch-layer layer-touchpoints" id="layer-touch">
+                    <h4><i class="fas fa-users"></i> Consumer Touchpoints</h4>
+                    <div class="arch-items">
+                        <span class="arch-item">ROTP (Guest Pay)</span>
+                        <span class="arch-item">Customer Portal</span>
+                        <span class="arch-item">IVR / Phone</span>
+                        <span class="arch-item">Agent Desktop</span>
+                        <span class="arch-item">Biller Website (SDK)</span>
+                        <span class="arch-item">Email / SMS Links</span>
+                    </div>
+                    <div class="arch-detail" id="detail-touch">
+                        <p>These are where your biller's customers interact. BillWallet appears as a widget, button, or IVR flow within these existing channels. No new channel needed.</p>
+                    </div>
+                </div>
 
-            <h3>App Codes</h3>
-            <table>
-                <thead>
-                    <tr><th>App Code</th><th>Context</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>consumer-widget</code></td><td>Embedded widget for biller sites</td></tr>
-                    <tr><td><code>agent-widget</code></td><td>Agent-facing widget</td></tr>
-                    <tr><td><code>portal</code></td><td>Standalone BillWallet portal</td></tr>
-                    <tr><td><code>invite</code></td><td>Invitation onboarding flow</td></tr>
-                    <tr><td><code>mobile-ios</code></td><td>iOS native app</td></tr>
-                    <tr><td><code>mobile-android</code></td><td>Android native app</td></tr>
-                </tbody>
-            </table>
+                <div class="arch-arrow"><i class="fas fa-arrow-down"></i></div>
 
-            <h2>3. The Core Argument</h2>
-            <h3>The Fundamental Insight</h3>
-            <p>The #1 reason consumers don't pay bills on time online is <strong>not</strong> that they don't want to — it's that they <strong>can't get past authentication</strong>. Traditional portals require:</p>
-            <ul>
-                <li>Remembering which email they used to register</li>
-                <li>Remembering a password (or doing a reset flow)</li>
-                <li>Knowing their account number</li>
-                <li>Re-entering payment card details</li>
-            </ul>
-            <blockquote>BillWallet® eliminates all of this. After a one-time email-based registration, the consumer's BillWallet® ID is their permanent key to all linked billers.</blockquote>
+                <div class="arch-layer layer-billwallet" id="layer-bw">
+                    <h4><i class="fas fa-wallet"></i> BillWallet™ Layer</h4>
+                    <div class="arch-items">
+                        <span class="arch-item highlight">Fast Signup</span>
+                        <span class="arch-item highlight">Express Payment</span>
+                        <span class="arch-item highlight">Checkout Widget</span>
+                        <span class="arch-item highlight">Invite Flow</span>
+                        <span class="arch-item highlight">BillWallet Portal</span>
+                        <span class="arch-item highlight">IVR Flow</span>
+                    </div>
+                    <div class="arch-detail" id="detail-bw">
+                        <p><strong>Fast Signup:</strong> Checkbox on ROTP confirmation — creates BillWallet account automatically.<br>
+                        <strong>Express Payment:</strong> One-click for returning users (no OTC, 1/month limit).<br>
+                        <strong>Checkout Widget:</strong> Consumer or Agent widget embedded in biller sites.<br>
+                        <strong>Invite:</strong> Email/QR invite to join or pay via BillWallet.<br>
+                        <strong>IVR:</strong> Caller ID detection → pay with default account/PM.</p>
+                    </div>
+                </div>
 
-            <h2>4. One-Time Payments: Core Platform vs. BillWallet®</h2>
-            <p><strong>One-time (guest) payments represent ~60% of all biller payments today.</strong> These are the least efficient, most expensive, and most abandonment-prone payments.</p>
+                <div class="arch-arrow"><i class="fas fa-arrow-down"></i></div>
 
-            <h3>The One-Time Payment Problem (Core Platform ROTP)</h3>
+                <div class="arch-layer layer-platform" id="layer-platform">
+                    <h4><i class="fas fa-server"></i> Paymentus Core Platform (IPP)</h4>
+                    <div class="arch-items">
+                        <span class="arch-item">Payment Processing</span>
+                        <span class="arch-item">Billing & Posting</span>
+                        <span class="arch-item">450+ CIS Integrations</span>
+                        <span class="arch-item">Reconciliation</span>
+                    </div>
+                    <div class="arch-detail" id="detail-platform">
+                        <p>BillWallet rides on top of IPP. All payment processing, billing lookups, and posting happen through the same trusted platform your billers already use. No new payment infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>The Consumer Journey (Real Example)</h2>
+
+            <div class="journey-comparison">
+                <div class="journey-side old">
+                    <h3><i class="fas fa-clock"></i> Without BillWallet (Today)</h3>
+                    <div class="journey-steps">
+                        <div class="step bad">Visit bill pay page</div>
+                        <div class="step bad">Find account number from paperwork</div>
+                        <div class="step bad">Enter account number</div>
+                        <div class="step bad">Enter name, address, verification</div>
+                        <div class="step bad">Enter card number, expiry, CVV</div>
+                        <div class="step bad">Review and confirm</div>
+                        <div class="step bad">Done — but nothing saved for next time</div>
+                    </div>
+                    <div class="journey-time">~3-5 minutes. Repeat every month.</div>
+                </div>
+                <div class="journey-side new">
+                    <h3><i class="fas fa-bolt"></i> With BillWallet (Express)</h3>
+                    <div class="journey-steps">
+                        <div class="step good">Visit bill pay page</div>
+                        <div class="step good">BillWallet widget opens automatically</div>
+                        <div class="step good">Click "Pay" — done!</div>
+                    </div>
+                    <div class="journey-time">Under 30 seconds. One click.</div>
+                </div>
+            </div>
+
+            <h2>How to Enable BillWallet for a Biller</h2>
+
+            <div class="implementation-steps">
+                <div class="impl-step">
+                    <div class="impl-number">1</div>
+                    <div class="impl-content">
+                        <h4>Verify Compatibility</h4>
+                        <p>Biller must be on Paymentus (TLA in database) and importable to IPN network. Check: no heavy custom account entry, no multipay requirement.</p>
+                    </div>
+                </div>
+                <div class="impl-step">
+                    <div class="impl-number">2</div>
+                    <div class="impl-content">
+                        <h4>Import to IPN Network</h4>
+                        <p>The scheduled import-merchant-job runs at 6am/6pm EST. For immediate import, raise an OPAT ticket.</p>
+                    </div>
+                </div>
+                <div class="impl-step">
+                    <div class="impl-number">3</div>
+                    <div class="impl-content">
+                        <h4>Enable on IPN Dashboard</h4>
+                        <p>Search for biller → Edit Mode → Enable payment types for BLWT → Check BLWT in Partner Onboarding → Save.</p>
+                    </div>
+                </div>
+                <div class="impl-step">
+                    <div class="impl-number">4</div>
+                    <div class="impl-content">
+                        <h4>Run Enable BillWallet Script</h4>
+                        <p>Sets up ROTP, CP, and AD checkout widgets. Options: deactivate "remember me" conflicts, enable BillWallet IVR.</p>
+                    </div>
+                </div>
+                <div class="impl-step">
+                    <div class="impl-number">5</div>
+                    <div class="impl-content">
+                        <h4>Test Payment</h4>
+                        <p>Make a BillWallet payment on ROTP/CP/AD. Verify Fast Signup checkbox appears on confirmation page.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>For External Biller Websites (SDK)</h3>
             <ol>
-                <li>Consumer arrives at biller payment page</li>
-                <li>Must enter account number (from paper bill or memory)</li>
-                <li>Must enter identifying info (name, address, last 4 SSN, etc.)</li>
-                <li>Must enter full payment method details (card number, expiry, CVV)</li>
-                <li>Review and submit</li>
-                <li><strong>None of this is remembered next month</strong> — they do it all again</li>
+                <li>Register biller as BillWallet partner (get Client ID + Secret)</li>
+                <li>Provide approved domains for widget loading</li>
+                <li>Embed JavaScript SDK on biller website</li>
+                <li>Call Client Credentials API → Client Token API → Initialize widget</li>
             </ol>
 
-            <h3>The BillWallet® One-Time Payment</h3>
-            <h4>First-time BillWallet® user (initial setup):</h4>
-            <ol>
-                <li>Consumer enters email</li>
-                <li>Gets verified → receives BillWallet® ID</li>
-                <li>Links account + payment method (one time)</li>
-                <li>Pays</li>
-            </ol>
-            <h4>Every subsequent payment:</h4>
-            <ol>
-                <li>Consumer confirms BillWallet® ID (email verification)</li>
-                <li>Sees linked bills with amounts due</li>
-                <li>Confirms payment</li>
-                <li><strong>Done in under 30 seconds</strong></li>
-            </ol>
+            <h2>How to Sell BillWallet</h2>
 
-            <h3>Side-by-Side Comparison</h3>
+            <div class="content-card">
+                <h3>The Pitch Framework</h3>
+                <table>
+                    <thead><tr><th>Step</th><th>What to Say</th><th>Why It Works</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>1. Identify Pain</strong></td><td>"What % of your payments are guest pay? How many payment calls do you get?"</td><td>Gets them thinking about cost-to-collect</td></tr>
+                        <tr><td><strong>2. Frame the Cost</strong></td><td>"Each of those guest pays resets every month. Each call costs you $5-$12."</td><td>Creates urgency with real dollars</td></tr>
+                        <tr><td><strong>3. Introduce Solution</strong></td><td>"BillWallet converts guest payers into one-click payers with a single checkbox."</td><td>Simple, tangible mechanism</td></tr>
+                        <tr><td><strong>4. Show Speed</strong></td><td>"Payments 72% faster. Under 30 seconds for returning users."</td><td>Concrete, measurable benefit</td></tr>
+                        <tr><td><strong>5. Remove Risk</strong></td><td>"It's already in your platform. Config change, no development work."</td><td>Zero implementation fear</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-card">
+                <h3>Real Scenarios — What to Say When...</h3>
+
+                <div class="scenario">
+                    <h4><i class="fas fa-building"></i> Utility Company with High Guest Pay</h4>
+                    <p><em>"You have 200,000 payments a month, 60% guest pay. That's 120,000 customers re-entering everything from scratch. With Fast Signup, even 15% conversion means 18,000 new BillWallet users per month who'll pay in one click next time. That's 18,000 fewer potential call-center contacts."</em></p>
+                </div>
+
+                <div class="scenario">
+                    <h4><i class="fas fa-shield-halved"></i> Insurance Company Worried About Security</h4>
+                    <p><em>"Your portal uses passwords — which are the #1 attack vector. BillWallet has no passwords at all. Uses one-time codes and Google/Apple sign-in. Plus domain whitelisting means the widget physically cannot load on unauthorized sites. It's more secure than what you have today."</em></p>
+                </div>
+
+                <div class="scenario">
+                    <h4><i class="fas fa-phone"></i> Biller with Heavy IVR Volume</h4>
+                    <p><em>"Your average call handle time for payments is 3+ minutes. BillWallet IVR detects the caller's phone number and lets them pay with their stored info — no reciting account numbers. Under 30 seconds per call. Multiply that time savings by your monthly call volume."</em></p>
+                </div>
+
+                <div class="scenario">
+                    <h4><i class="fas fa-laptop"></i> Biller with External Website</h4>
+                    <p><em>"We embed a JavaScript widget directly on your site. Your customers never leave your brand experience. They click 'Pay with BillWallet', verify with a one-time code, and pay. Widget only loads on your approved domains — fully secure."</em></p>
+                </div>
+            </div>
+
+            <h2>Success Indicators</h2>
+
+            <div class="success-grid">
+                <div class="success-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Fast Signup Rate</h4>
+                    <p>% of ROTP payers who check "Save to BillWallet"</p>
+                    <p class="target">Target: 10-20% in first 3 months</p>
+                </div>
+                <div class="success-card">
+                    <i class="fas fa-redo"></i>
+                    <h4>Return Rate</h4>
+                    <p>% of BillWallet users who use it for next payment</p>
+                    <p class="target">Target: 40%+ returning via Express Payment</p>
+                </div>
+                <div class="success-card">
+                    <i class="fas fa-phone-slash"></i>
+                    <h4>Call Deflection</h4>
+                    <p>Reduction in payment-related call center contacts</p>
+                    <p class="target">Target: 15-30% reduction in payment calls</p>
+                </div>
+                <div class="success-card">
+                    <i class="fas fa-stopwatch"></i>
+                    <h4>Payment Speed</h4>
+                    <p>Average time from widget open to payment complete</p>
+                    <p class="target">Target: Under 30 seconds for returning users</p>
+                </div>
+            </div>
+
+            <h2>Known Limitations</h2>
             <table>
-                <thead>
-                    <tr><th>Dimension</th><th>Core ROTP</th><th>BillWallet®</th></tr>
-                </thead>
+                <thead><tr><th>Limitation</th><th>Detail</th><th>What to Tell the Client</th></tr></thead>
                 <tbody>
-                    <tr><td>Steps to pay (returning user)</td><td>5–7</td><td><strong>2–3</strong></td></tr>
-                    <tr><td>Account number required</td><td>Every time</td><td><strong>Never (after linking)</strong></td></tr>
-                    <tr><td>Card details required</td><td>Every time</td><td><strong>Never (after linking)</strong></td></tr>
-                    <tr><td>Password required</td><td>N/A (guest) or Yes (registered)</td><td><strong>Never</strong></td></tr>
-                    <tr><td>Time to complete</td><td>2–5 minutes</td><td><strong>Under 30 seconds</strong></td></tr>
-                    <tr><td>Data stored for next visit</td><td>Nothing</td><td><strong>Everything (securely)</strong></td></tr>
-                    <tr><td>Path to AutoPay</td><td>None (no relationship)</td><td><strong>Direct (already linked)</strong></td></tr>
-                    <tr><td>Security model</td><td>Data-in-transit only</td><td><strong>Tokenized + verified identity</strong></td></tr>
-                </tbody>
-            </table>
-            <blockquote>Every ROTP payment that becomes a BillWallet® payment is a consumer you'll never lose to login friction again.</blockquote>
-
-            <h2>5. Key Features</h2>
-
-            <h3>Express Payment (One-Click)</h3>
-            <p>The fastest BillWallet flow for returning users:</p>
-            <ul>
-                <li>No OTC required — device-based recognition</li>
-                <li>Default account and payment method pre-selected</li>
-                <li><strong>Limitations:</strong> Max 1 payment/month, cannot exceed amount due, cannot change PM</li>
-                <li>If user needs changes → redirected to standard widget with OTC</li>
-            </ul>
-
-            <h3>Fast Signup (ROTP Conversion)</h3>
-            <p>The primary mechanism for converting one-time payers:</p>
-            <ul>
-                <li>"Save to BillWallet" checkbox on ROTP payment confirmation page</li>
-                <li>BillWallet account created automatically; contact info, PM, and billing account imported</li>
-                <li>User receives email to verify their BillWallet ID</li>
-                <li>Next ROTP visit on same device → BillWallet widget auto-opens in Express mode</li>
-            </ul>
-
-            <h3>Invite Flows</h3>
-            <ul>
-                <li><strong>Invite to Join</strong> — Generated after ROTP/CP/AD payment; imports user data</li>
-                <li><strong>Invite to Pay</strong> — User receives invite for a specific payment via BillWallet</li>
-                <li>Invites sent via email link or QR code</li>
-                <li>New users (SIGNUP flow): No OTC needed</li>
-                <li>Existing users (IMPORT flow): OTC required for verification</li>
-            </ul>
-
-            <h3>IVR Integration</h3>
-            <ul>
-                <li><strong>BillWallet IVR Flow:</strong> Caller ID matched to registered phone; pays with default account/PM</li>
-                <li>User is NOT fully authenticated (caller ID only) — cannot modify wallet</li>
-                <li><strong>IVR Invite Flow:</strong> Non-BillWallet users offered to join via SMS after payment</li>
-            </ul>
-
-            <h3>AutoPay — Current Limitation</h3>
-            <p><strong>Important:</strong> AutoPay is NOT currently a BillWallet feature. It remains in the core platform (Customer Portal). BillWallet handles one-time and express payments only.</p>
-
-            <h3>Known Limitations</h3>
-            <table>
-                <thead><tr><th>Limitation</th><th>Detail</th></tr></thead>
-                <tbody>
-                    <tr><td>AutoPay</td><td>Not supported in BillWallet</td></tr>
-                    <tr><td>Multipay</td><td>Only single-pay supported</td></tr>
-                    <tr><td>IPN dependency</td><td>Billers not on IPN cannot use BillWallet</td></tr>
-                    <tr><td>Express Payment</td><td>1 payment/month, cannot exceed amount due</td></tr>
-                    <tr><td>IVR</td><td>Cannot modify wallet (not fully authenticated)</td></tr>
+                    <tr><td>AutoPay</td><td>Not supported in BillWallet</td><td>"BillWallet handles one-time payments. AutoPay stays in the core portal. They complement each other."</td></tr>
+                    <tr><td>Multipay</td><td>Single-pay only</td><td>"Currently optimized for single bill payments. Multi-account payment is on the roadmap."</td></tr>
+                    <tr><td>IPN Required</td><td>Biller must be importable to IPN</td><td>"If you're on Paymentus, you're almost certainly compatible. We'll verify during setup."</td></tr>
+                    <tr><td>Express Limits</td><td>1 payment/month, cannot exceed amount due</td><td>"Express is the fast lane for standard payments. For special cases, the full widget is available."</td></tr>
+                    <tr><td>IVR Restrictions</td><td>Cannot modify wallet via IVR</td><td>"IVR is for fast payments. Wallet management happens on web/portal."</td></tr>
                 </tbody>
             </table>
 
-            <h2>6. Security Deep-Dive</h2>
-            <h3>Authentication Model</h3>
-            <ul>
-                <li><strong>Standard login:</strong> Email → One Time Code (OTC) → Authenticated</li>
-                <li><strong>Social login:</strong> Google or Apple SSO (no OTC)</li>
-                <li><strong>Express Payment:</strong> Device recognition for returning users (no OTC, limited actions)</li>
-                <li><strong>IVR:</strong> Caller ID matched to registered phone (not full authentication)</li>
-                <li><strong>BillWallet PIN:</strong> Available in Portal for additional security</li>
-            </ul>
-
-            <h3>Shared Platform Security</h3>
-            <ul>
-                <li>PCI DSS Level 1 certification</li>
-                <li>SOC 1 / SOC 2 compliance</li>
-                <li>HIPAA compliance (where applicable)</li>
-                <li>Encryption in transit and at rest</li>
-            </ul>
-
-            <h3>BillWallet-Specific Security Layers</h3>
+            <h2>Quick Reference — Login Methods</h2>
             <table>
-                <thead>
-                    <tr><th>Security Feature</th><th>How It Works</th><th>Why It's Better</th></tr>
-                </thead>
+                <thead><tr><th>Method</th><th>How It Works</th><th>When It's Used</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>No stored passwords</strong></td><td>OTC-based verification, no passwords stored</td><td>Eliminates credential stuffing, phishing, brute force</td></tr>
-                    <tr><td><strong>Verified identity</strong></td><td>Identity proofed before BillWallet® ID issuance</td><td>Harder to create fraudulent accounts</td></tr>
-                    <tr><td><strong>Issuer isolation</strong></td><td><code>validateBillWalletIssuer</code> middleware rejects non-BLWT requests</td><td>Cross-tenant data leakage architecturally impossible</td></tr>
-                    <tr><td><strong>Dedicated PII masking</strong></td><td><code>sanitizeBillWalletInvite()</code> masks names, emails, cards in logs</td><td>Internal systems cannot accidentally expose data</td></tr>
-                    <tr><td><strong>Session-scoped headers</strong></td><td><code>x-session-id</code>, <code>x-user-identity</code>, <code>x-bw-app-code</code></td><td>Full audit trail with session binding</td></tr>
-                    <tr><td><strong>XOTP protection</strong></td><td>Payments go through one-time payment token</td><td>Credentials never travel in reusable form</td></tr>
-                    <tr><td><strong>JWT scope enforcement</strong></td><td>UI/API enforce granular scopes (<code>hasScope</code>)</td><td>Least-privilege access at every layer</td></tr>
-                    <tr><td><strong>SecureService™</strong></td><td>Patented end-to-end framework for all interactions</td><td>Even agent/IVR channels maintain full encryption</td></tr>
-                    <tr><td><strong>Sentry PII allow-lists</strong></td><td>Only approved fields sent to error monitoring</td><td>No accidental PII in observability tools</td></tr>
-                </tbody>
-            </table>
-            <blockquote>"Traditional portals protect data with passwords that can be stolen. BillWallet® uses one-time codes and social login — no stored credentials means nothing to steal."</blockquote>
-
-            <h2>7. Talking Points by Audience</h2>
-
-            <h3>For Sales (talking to biller executives)</h3>
-            <ul>
-                <li>"80% of bill payments are abandoned at login. BillWallet® eliminates login entirely."</li>
-                <li>"Your one-time payers are your most expensive customers. BillWallet® converts them to digital relationships at near-zero friction."</li>
-                <li>"BillWallet® users are 4x more likely to complete payment and significantly more likely to enroll in AutoPay."</li>
-                <li>"It's passwordless AND PCI Level 1. More convenient AND more secure."</li>
-                <li>"It's patented — your competitors cannot offer this."</li>
-            </ul>
-
-            <h3>For Implementation (talking to biller technical teams)</h3>
-            <ul>
-                <li>"BillWallet® deploys as a widget, hosted page, or API — no changes to your CIS."</li>
-                <li>"If you're already on IPP, BillWallet® is an activation, not a migration."</li>
-                <li>"The BillWallet® microservices run on the same IPN stack you already trust."</li>
-                <li>"Configuration is per-biller via bill-wallet-config-ms — no code changes needed."</li>
-            </ul>
-
-            <h3>For Support (talking to consumers or biller agents)</h3>
-            <ul>
-                <li>"BillWallet® is a free, fast way to pay bills using just your email."</li>
-                <li>"You never need to remember a password or account number again."</li>
-                <li>"Your payment information is encrypted at the highest banking standard (PCI Level 1)."</li>
-                <li>"If a customer calls about login issues, this is the ideal time to suggest BillWallet®."</li>
-            </ul>
-
-            <h3>For Product/Engineering (understanding the architecture)</h3>
-            <ul>
-                <li>"BillWallet® is the identity + wallet layer on IPN. Core platform handles billing/posting/reconciliation below it."</li>
-                <li>"The BLWT issuer enforcement ensures BillWallet® services can never accidentally access non-BillWallet data."</li>
-                <li>"XOTP tokens mean we never store or transmit reusable payment credentials in the BillWallet® layer."</li>
-                <li>"Every channel uses the same identity-ms verification — no channel has weaker auth."</li>
-            </ul>
-
-            <h2>8. FAQ</h2>
-            <h4>Does BillWallet® replace the Customer Portal (CP)?</h4>
-            <p>No. CP is the full-featured registered portal with bill history, usage details, payment plans, etc. BillWallet® is the fast-pay identity layer. A consumer can use BillWallet® to authenticate INTO the CP, or use BillWallet® standalone for quick payments.</p>
-
-            <h4>Does BillWallet® replace ROTP (guest pay)?</h4>
-            <p>It provides a better alternative. ROTP still exists for consumers who refuse to register anything. But BillWallet® registration is so low-friction (email only) that most consumers will prefer it.</p>
-
-            <h4>Can a consumer have BillWallet® AND a traditional portal account?</h4>
-            <p>Yes. BillWallet® can coexist with or replace traditional login. The identity-ms manages the relationship.</p>
-
-            <h4>How does BillWallet® work on IVR?</h4>
-            <p>The IVR prompts for the BillWallet® email or ID. The system verifies identity through the same identity-ms backend. Payment is processed without the consumer needing to recite account numbers or card details.</p>
-
-            <h4>What login providers does BillWallet® support?</h4>
-            <p>Email (primary), Google, Apple, and Fast Signup. See <code>LoginProviders</code> enum in lib-blwt-internal.</p>
-
-            <h4>How is BillWallet® different from Apple Pay / Google Pay?</h4>
-            <p>Apple/Google Pay are retail wallets for one-off purchases. They don't store biller account relationships, don't work on IVR, and don't create persistent service relationships. BillWallet® is purpose-built for the biller economy.</p>
-
-            <h2>9. Key Metrics & Proof Points</h2>
-            <table>
-                <thead>
-                    <tr><th>Metric</th><th>Source</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>4x faster payments</td><td>Production measurement</td></tr>
-                    <tr><td>80% login abandonment (industry)</td><td>Paymentus research</td></tr>
-                    <tr><td>60% one-time payment volume</td><td>Biller data across verticals</td></tr>
-                    <tr><td>12–15 bills per household/month</td><td>U.S. Bureau of Labor Statistics</td></tr>
-                    <tr><td>9B+ manual account entries/year</td><td>Paymentus market analysis</td></tr>
-                    <tr><td>PCI Level 1 certified</td><td>Paymentus compliance program</td></tr>
-                    <tr><td>Patented technology</td><td>USPTO (proprietary to Paymentus)</td></tr>
+                    <tr><td><strong>Email + OTC</strong></td><td>Enter email → receive one-time code → enter code</td><td>Standard login, first-time widget use</td></tr>
+                    <tr><td><strong>Google Sign-In</strong></td><td>One-click Google authentication</td><td>Users with Google accounts</td></tr>
+                    <tr><td><strong>Apple Sign-In</strong></td><td>One-click Apple authentication</td><td>Users with Apple accounts</td></tr>
+                    <tr><td><strong>Express Payment</strong></td><td>Device recognition, no verification</td><td>Returning users on same device (1/month limit)</td></tr>
+                    <tr><td><strong>Fast Signup</strong></td><td>Checkbox on ROTP confirmation page</td><td>Converting guest payers (email verification later)</td></tr>
+                    <tr><td><strong>IVR</strong></td><td>Caller ID matched to registered phone</td><td>Phone payments (limited — can't modify wallet)</td></tr>
                 </tbody>
             </table>
 
-            <h2>10. The Value Chain Summary</h2>
-            <pre><code>For Consumers:             For Billers:                 For Paymentus:
-─────────────              ────────────                 ──────────────
-• No passwords             • Reduced DSO                • Higher ARPU per biller
-• One ID everywhere        • Lower call center costs    • Sticky platform (patent)
-• 4x faster payments       • Higher digital adoption    • Network effect (IPN)
-• More secure              • AutoPay conversion         • Competitive moat
-• AI bill insights         • Better CSAT/NPS            • AI/ML data layer
-                           • Reduced fraud risk         • Cross-sell opportunities</code></pre>
+            <h2>CEO Quote</h2>
+            <blockquote class="ceo-quote">
+                "The system automatically recognizes the consumer as an individual and their relationship to the biller. Across multiple channels. A remember me that remembers ALL of you with BillWallet."
+                <cite>— Dushyant Sharma, Founder and CEO, Paymentus</cite>
+            </blockquote>
 
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-brand-centered">
-                <span class="footer-logo-text">BillWallet<sup>®</sup></span>
+                <span class="footer-logo-text">BillWallet<sup>™</sup></span>
                 <span class="footer-subtext">by <strong>Paymentus</strong></span>
             </div>
             <div class="footer-bottom">
@@ -374,5 +328,19 @@
     </footer>
 
     <script src="../js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/downloads.js"></script>
+    <script>
+        document.querySelectorAll('.arch-layer').forEach(layer => {
+            layer.addEventListener('click', () => {
+                const detail = layer.querySelector('.arch-detail');
+                const isOpen = detail.classList.contains('open');
+                document.querySelectorAll('.arch-detail').forEach(d => d.classList.remove('open'));
+                if (!isOpen) detail.classList.add('open');
+            });
+        });
+    </script>
 </body>
 </html>
